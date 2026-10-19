@@ -2,7 +2,9 @@
 
 ## Tl;dr
 
-![example](example.jpg)
+<p align="center">
+  <img src="example.jpg" width="50%" alt="Example">
+</p>
 
 This is an arbitrary code execution (ACE) exploit for Rambo for the NES that uses the in-game password system to execute code. I demonstrated this by injecting some custom dialogue that I displayed through the game's dialogue routines. I originally discovered this exploit by discovering that some passwords in the game kick you back to the title screen after entering. Using the debugger in Mesen I was able to execute a single instruction to confirm that  ACE was possible at all. Once I determined that it was, I used Codex to help build a payload and execution system.
 
