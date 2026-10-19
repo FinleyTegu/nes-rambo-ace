@@ -94,3 +94,8 @@ The fast MMO SHA-256 is `c5eed0b95f97fac4a1f8289c947a86a42c162a09e0e4acb5b016cd0
 ## Scope and limits
 
 Verification was performed in MesenCE 2.2.1 using the named ROM revision. No physical-console test is claimed. No ROM bytes were modified and slot 1 was not overwritten. The movie is a Mesen version 3 movie with its initial state embedded; it does not include the copyrighted ROM.
+
+
+## Building your own payload
+
+See [BUILDING-YOUR-OWN-PAYLOAD.md](BUILDING-YOUR-OWN-PAYLOAD.md) for the development guide.
