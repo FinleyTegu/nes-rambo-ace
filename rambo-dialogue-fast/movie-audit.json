@@ -1,0 +1,17 @@
+{
+  "sha256": "c5eed0b95f97fac4a1f8289c947a86a42c162a09e0e4acb5b016cd0a93f4493c",
+  "inputSamples": 10177,
+  "previousInputSamples": 54692,
+  "wholeMovieSpeedup": 5.374078805148865,
+  "firstPayloadOffset": 2203,
+  "firstPayloadSamples": 4095,
+  "fastNibbleOffset": 6298,
+  "fastNibbleSamples": 1027,
+  "extraHeldSamples": 3,
+  "all768PayloadBytes": "PASS",
+  "noOpposingDirections": true,
+  "embeddedInitialStateBytes": 9168,
+  "movieFormat": 3,
+  "cheats": false,
+  "archiveIntegrity": "PASS"
+}

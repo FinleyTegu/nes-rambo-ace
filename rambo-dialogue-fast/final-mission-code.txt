@@ -1,0 +1,5 @@
+Rambo (USA) (Rev 1)
+Final mission code (case-sensitive):
+F?0fizk7Gp4fFbsGGWm2XdACr0Y4GHWX
+
+Verified in MesenCE 2.2.1 on 2026-10-18.

@@ -1,0 +1,35 @@
+Observed Mesen log transcription, October 18, 2026. Independent fast MMO playback with a read-only observer.
+81-BYTE STAGE MATCH=true
+CONTROLLER-SYNTHESIZED WRAP STACK RECEIVER MATCH=true
+CONTROLLER-ONLY FIRST 256 BYTES MATCH=true; native jump $0606
+CONTROLLER-ONLY SECOND 512 BYTES MATCH=true; native entry $0640
+FAST NATIVE ENTRY input samples=7325; nibbles=1024
+FAST MOVIE PAYLOAD MATCH; observer supplies no input
+PAGE 1 text/stock palettes/white glyphs/music match=true
+PAGE 1 native wait elapsed=301 NMI frames
+MOUTH page=1 calls=301 U open=9 closed=9 L open=0 closed=0 match=true
+PAGE 2 text/stock palettes/white glyphs/music match=true
+PAGE 2 native wait elapsed=301 NMI frames
+MOUTH page=2 calls=602 U open=18 closed=18 L open=0 closed=0 match=true
+PAGE 3 text/stock palettes/white glyphs/music match=true
+PAGE 3 native wait elapsed=301 NMI frames
+MOUTH page=3 calls=903 U open=27 closed=27 L open=0 closed=0 match=true
+PAGE 4 text/stock palettes/white glyphs/music match=true
+PAGE 4 native wait elapsed=301 NMI frames
+MOUTH page=4 calls=1204 U open=36 closed=36 L open=0 closed=0 match=true
+PAGE 5 text/stock palettes/white glyphs/music match=true
+PAGE 5 native wait elapsed=301 NMI frames
+MOUTH page=5 calls=1505 U open=45 closed=45 L open=0 closed=0 match=true
+PAGE 6 text/stock palettes/white glyphs/music match=true
+PAGE 6 native wait elapsed=301 NMI frames
+MOUTH page=6 calls=1806 U open=54 closed=54 L open=0 closed=0 match=true
+PAGE 7 text/stock palettes/white glyphs/music match=true
+PAGE 7 native wait elapsed=301 NMI frames
+MOUTH page=7 calls=2107 U open=63 closed=63 L open=0 closed=0 match=true
+PAGE 8 text/stock palettes/white glyphs/music match=true
+PAGE 8 native wait elapsed=301 NMI frames
+MOUTH page=8 calls=2408 U open=72 closed=72 L open=0 closed=0 match=true
+PAGE 9 text/stock palettes/white glyphs/music match=true
+PAGE 9 native wait elapsed=301 NMI frames
+MOUTH page=9 calls=2709 U open=72 closed=72 L open=9 closed=9 match=true
+PASS: CONTROLLER-ONLY NINE-PAGE RUN COMPLETE; stock palette/music, all 301-frame delays verified; stock mouth animation

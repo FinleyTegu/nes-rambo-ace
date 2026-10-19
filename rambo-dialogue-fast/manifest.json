@@ -1,0 +1,17 @@
+{
+  "build-payload.py": "84f7207c2687698ddc14b961792ec75a96096ab230ae6655910f689d2918c902",
+  "controller-replay.lua": "54c52788a343b43633ded2be922b8c3c71d87020e2cbb0dabb77b5b2a4208a4b",
+  "final-mission-code.txt": "2d8b7a51a6c205d0fa1d043a86ca0a3ad00e151758e738bce63853a85c7202aa",
+  "movie-audit.json": "cd32152414b0a2b671a3ade02f3cff56cbdec110a422f0d5e72748b99e0b1a5d",
+  "movie-observer.lua": "399718670d9f1a273319c3d2f535510f3f2a18e193ab5577636adfc227166e17",
+  "movie-playback-early-log.jpg": "1d1bfdf51f740e91325c7a86494cf494b421030f5a4f7964ddde30bab9a0e45a",
+  "movie-playback-final-log.jpg": "a6ab62e706f14408428827d2ac32a3e7dc4b56d1b191c70accbdadd5f94406a2",
+  "movie-playback-middle-log.jpg": "d631d9bbf08c2d92142f697576395271240ae3a885701a915665faad993150c6",
+  "payload.json": "e95eb80150e85e550b30c1faf6e841c184458bebbc04466d4470f533a3caa3a5",
+  "rambo-ace-fast.mmo": "c5eed0b95f97fac4a1f8289c947a86a42c162a09e0e4acb5b016cd0a93f4493c",
+  "README.md": "4c32a96f09c86fba880aeebe757666e9d7a02611a01d579cc80daf4067e69990",
+  "recording-final-log.jpg": "45405a03efecefce073c67aae8d00e1e68674d012c8c9e6f8aae282a0cd232a8",
+  "recording-transfer-log.jpg": "3061c8d9987173efce0509b2239f45dbca7bb50453c63490334cecd86556bb50",
+  "verification.txt": "2eedefd6f71afe8a9038a459de1bb17b739534fe6008be4bb75e4b37656f32e8",
+  "verify-payload.py": "ce896cf8bd860fae194e73d485744dc5f197751813ebeda2e977509730bae58f"
+}
