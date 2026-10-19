@@ -1,11 +1,10 @@
-# Rambo NES ACE: technical handoff
-
 **Status:** Complete controller-only delivery and independent movie playback verified in MesenCE 2.2.1 on October 18, 2026. This document captures the final mission code, the exploit path, the receiver and dialogue layout, measured timing, reproduction steps, and evidence files.
 
 ## Final mission code
 
 ```text
-F?0fizk7Gp4fFbsGGWm2XdACr0Y4GHWX
+F?0f izk7 Gp4f FbsG
+GWm2 XdAC r0Y4 GHWX
 ```
 
 The code is case-sensitive and applies to **Rambo (USA) (Rev 1)**. The ROM SHA-256 used for verification is `1C621C11761C56B1167ED3302F2A2BB8E4F0D64742D11CF539447EAE2199A1AB`.
@@ -14,11 +13,9 @@ The code is case-sensitive and applies to **Rambo (USA) (Rev 1)**. The ROM SHA-2
 
 The mission-code path bootstraps arbitrary controller-fed data into RAM and enters a custom nine-page dialogue implemented with the game's own graphics, text, and dialogue routines. The delivered scene uses the characters' stock palettes, white text, the stock dialogue music, and stock mouth animation for the speaking character. Each page waits 301 NMI frames, approximately five seconds, before advancing.
 
-The faster recording contains 10,177 input samples. The prior verified recording contained 54,692, so the complete movie is 5.37 times faster. The payload portion takes 5,122 samples, compared with 49,145 previously, or 9.59 times faster. At normal NTSC playback speed, the full recording takes about 2:49; the payload transfer takes about 85 seconds. The scene's five-second reading pauses are unchanged.
-
 ## How the ACE works
 
-The password is accepted by the game's normal mission-code screen. The game decodes it into a compact state in RAM, including bytes that later act as a script. The relevant bug is that those decoded values are not fully validated before the script interpreter uses them. The resulting values steer the interpreter into its own decoded RAM data and let that data alter execution. This is more precise than saying only “unsanitized password inputs”: the weakness is the missing validation at the boundary between password decoding and script interpretation.
+The password is accepted by the game's normal mission-code screen. The game decodes it into a compact state in RAM, including bytes that later act as a script. The relevant bug is that those decoded values are not fully validated before the script interpreter uses them. The resulting values steer the interpreter into its own decoded RAM data and let that data alter execution. 
 
 The verified control-flow chain is:
 
@@ -29,13 +26,9 @@ The verified control-flow chain is:
 5. The stage constructs a 22-byte receiver at `$0191–$01A6`. That receiver sets `SP=$00`, then uses the stock fresh-press/release routine at `$87BC` to receive 256 controller-fed bytes into `$0606–$0705` before jumping there.
 6. The first block installs the second receiver and the dialogue payload. The second receiver sets `SP=$FF`, reads four controller bits per NMI frame, receives the remaining 512 bytes, and jumps to the native initializer at `$0640`.
 
-### Stack safety finding
-
-An earlier synthesized reader left the stack at `$96`. During NMI, a `JSR` saved its return address at `$017F/$0180`, where the sound routine also keeps state. The sound code changed `$0180`, corrupting the return address. The sound routine returned to `$EE81`; an `RTS` then read `$0080` and transferred execution to `$0081`, where opcode `$00` was observed before the diagnostic stopped. The receiver repair explicitly resets the stack: the first receiver uses `SP=$00` to place stack traffic at the top of page-one RAM, and the second receiver starts with `SP=$FF`. This avoids the fixed sound variables in the verified run.
-
 ## Faster controller protocol
 
-The 81-byte synthesis stage and original 256-byte receiver were kept. Their controller pulse timing changed from four input samples pressed plus four released to one pressed plus one released. This cut that first bitwise transfer from 64 to 16 frames per byte. One-frame password-menu taps were tested and dropped because a repeated character could be missed; mission-code entry retains the verified four-frame press and release.
+The 81-byte synthesis stage and original 256-byte receiver were kept. Their controller pulse timing changed from four input samples pressed plus four released to one pressed plus one released. This cut that first bitwise transfer from 64 to 16 frames per byte. One-frame password-menu taps were tested and dropped because a repeated character could be missed; mission-code entry retains the verified four-frame press and release. This could likely be sped up to two or three frames per without impacting the execution.
 
 The first block installs a 58-byte receiver. It synchronizes against the game's NMI counter at `$0124` and samples the controller through the stock routine at `$8E4E`. A frame carries four bits in A, B, Select, and Start; the D-pad remains neutral. The high nibble is read first and the low nibble second. Two nibbles form each unrestricted byte. The recorded run used 1,027 samples for 1,024 nibble reads because three held samples crossed frame boundaries.
 
@@ -57,15 +50,11 @@ The code installs the conversation and invokes the game's own dialogue machinery
 
 Zero-page `$06/$07` holds the destination pointer. The second receiver writes `$0400–$05FF`, resets `SP=$FF`, and enters the initializer at `$0640`. The initializer sets the stock character palettes, loads dialogue music ID `$0E` through the game's music routine, and starts the stock VM. Character colors were compared with the original scene; text is white.
 
-The text and animation were checked across all nine pages. The complete URL remains together in one box. The mouth wrapper calls the stock animation routine without resetting the dialogue timer. Playback evidence records 301 NMI frames for each page and open/closed mouth states for the active speaker, while the inactive character remains still.
-
 ## Reproduction
 
 Use MesenCE 2.2.1 and the matching ROM revision and SHA-256 above.
 
-For an already recorded playback, open `rambo-dialogue-fast/rambo-ace-fast.mmo` in Mesen's movie player and play at Normal speed. The movie has a clean password-screen initial state embedded and does not need a Lua input generator. Stop any active Lua script before playback. The observer is optional and read-only; it supplies no input or memory/register changes.
-
-To reproduce the live controller-driven run, restore the untouched slot-1 password-screen baseline and run `rambo-dialogue-fast/controller-replay.lua`. It generates the inputs and verifies the transfer. Then play the saved MMO independently with `rambo-dialogue-fast/movie-observer.lua` enabled to check the recording without supplying input. `rambo-dialogue-fast/README.md` has the concise procedure and protocol notes.
+For an already recorded playback, open `rambo-dialogue-fast/rambo-ace-fast.mmo` in Mesen's movie player and play at Normal speed. To reproduce the live controller-driven run, restore the untouched slot-1 password-screen baseline and run `rambo-dialogue-fast/controller-replay.lua`. It generates the inputs and verifies the transfer. Then play the saved MMO independently with `rambo-dialogue-fast/movie-observer.lua` enabled to check the recording without supplying input. `rambo-dialogue-fast/README.md` has the concise procedure and protocol notes.
 
 The independent payload checker can be run with Python:
 
@@ -92,4 +81,4 @@ The fast MMO SHA-256 is `c5eed0b95f97fac4a1f8289c947a86a42c162a09e0e4acb5b016cd0
 
 ## Scope and limits
 
-Verification was performed in MesenCE 2.2.1 using the named ROM revision. No physical-console test is claimed. No ROM bytes were modified and slot 1 was not overwritten. The movie is a Mesen version 3 movie with its initial state embedded; it does not include the copyrighted ROM. The 81-byte synthesis stage was selected from exploratory search and verified in the emulator; no proof of globally minimal code size or maximum possible transfer speed was established. The measured speed is for this exact recording and protocol.
+Verification was performed in MesenCE 2.2.1 using the named ROM revision. No physical-console test is claimed. No ROM bytes were modified and slot 1 was not overwritten. The movie is a Mesen version 3 movie with its initial state embedded; it does not include the copyrighted ROM.
